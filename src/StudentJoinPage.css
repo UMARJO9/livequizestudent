@@ -1,0 +1,144 @@
+/* Глобальный фикс для адаптивности */
+* {
+    box-sizing: border-box;
+}
+
+/* Страница на всю ширину и высоту */
+.join-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #4a90e2, #9012fe);
+    padding: 20px;
+}
+
+/* Основной блок */
+.card {
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    padding: 32px 28px;
+
+    border-radius: 24px;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    animation: fade-in 0.35s ease;
+}
+
+/* Заголовок */
+.title {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+    color: #222;
+}
+
+/* Form layout */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Input */
+.input {
+    width: 100%;
+    padding: 14px 16px;
+
+    font-size: 18px;
+    font-weight: 500;
+
+    border-radius: 12px;
+    border: 2px solid #dcdcdc;
+
+    background: #fafafa;
+    transition: 0.25s;
+}
+
+.input:focus {
+    border-color: #4a90e2;
+    background: #fff;
+    outline: none;
+}
+
+/* Button */
+.btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    background: #4a90e2;
+    color: #fff;
+    cursor: pointer;
+
+    transition: background 0.25s ease;
+}
+
+.btn:hover {
+    background: #357ab8;
+}
+
+/* Error text */
+.error {
+    margin-top: -10px;
+    color: #ff3b30;
+    text-align: center;
+    font-size: 15px;
+}
+
+/* Fade animation */
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/*
+    📱📱📱 АДАПТИВ ДЛЯ ТЕЛЕФОНОВ (до 480px)
+*/
+@media (max-width: 480px) {
+    .card {
+        padding: 24px 20px;
+        max-width: 95%;
+        border-radius: 18px;
+        gap: 20px;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+
+    .input {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+/*
+    📱 Планшеты (480–768px)
+*/
+@media (max-width: 768px) {
+    .card {
+        max-width: 380px;
+    }
+}
