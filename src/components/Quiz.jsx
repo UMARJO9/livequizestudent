@@ -1,28 +1,43 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 function Quiz({ question, onAnswer, answered, answerResult, timerExpired, score }) {
   const [selectedOption, setSelectedOption] = useState(null)
   const [timeLeft, setTimeLeft] = useState(question?.time || 20)
+  const timerRef = useRef(null)
 
   useEffect(() => {
+    // Очищаем предыдущий таймер
+    if (timerRef.current) {
+      clearInterval(timerRef.current)
+      timerRef.current = null
+    }
+
+    // Сбрасываем состояние для нового вопроса
     setSelectedOption(null)
-    setTimeLeft(question?.time || 20)
-  }, [question?.id])
+    const initialTime = question?.time || 20
+    setTimeLeft(initialTime)
 
-  useEffect(() => {
-    if (timeLeft <= 0 || answered || timerExpired) return
+    // Не запускаем таймер если уже ответили или время вышло
+    if (answered || timerExpired) return
 
-    const timer = setInterval(() => {
+    // Запускаем новый таймер
+    timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
-          clearInterval(timer)
+          clearInterval(timerRef.current)
+          timerRef.current = null
           return 0
         }
         return prev - 1
       })
     }, 1000)
 
-    return () => clearInterval(timer)
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+        timerRef.current = null
+      }
+    }
   }, [question?.id, answered, timerExpired])
 
   const handleOptionClick = (optionId) => {
