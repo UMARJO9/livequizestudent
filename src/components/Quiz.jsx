@@ -19,8 +19,8 @@ function Quiz({ question, onAnswer, answered, answerResult, timerExpired, score 
       timerRef.current = null
     }
 
-    // Не запускаем таймер если уже ответили или время вышло
-    if (answered || timerExpired) return
+    // Не запускаем таймер если время вышло (от сервера)
+    if (timerExpired) return
 
     // Запускаем новый таймер
     timerRef.current = setInterval(() => {
@@ -40,7 +40,7 @@ function Quiz({ question, onAnswer, answered, answerResult, timerExpired, score 
         timerRef.current = null
       }
     }
-  }, [question?.id, answered, timerExpired])
+  }, [question?.id, timerExpired])
 
   const handleOptionClick = (optionId) => {
     if (answered || timeLeft <= 0 || timerExpired) return
