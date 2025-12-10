@@ -1,6 +1,24 @@
 import { io } from 'socket.io-client'
 
-const SOCKET_URL = 'http://127.0.0.1:8000'
+const DEFAULT_PORT = 8000
+
+const resolveSocketUrl = () => {
+  const envUrl = import.meta.env?.VITE_SOCKET_URL
+
+  if (envUrl && envUrl.trim()) {
+    return envUrl.trim()
+  }
+
+  if (typeof window !== 'undefined') {
+    const { protocol, hostname } = window.location
+    const httpProtocol = protocol === 'https:' ? 'https://' : 'http://'
+    return `${httpProtocol}${hostname}:${DEFAULT_PORT}`
+  }
+
+  return `http://127.0.0.1:${DEFAULT_PORT}`
+}
+
+const SOCKET_URL = resolveSocketUrl()
 
 export const socket = io(SOCKET_URL, {
   autoConnect: false,
