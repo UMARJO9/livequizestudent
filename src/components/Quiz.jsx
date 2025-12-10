@@ -5,17 +5,19 @@ function Quiz({ question, onAnswer, answered, answerResult, timerExpired, score 
   const [timeLeft, setTimeLeft] = useState(question?.time || 20)
   const timerRef = useRef(null)
 
+  // Сброс состояния только при смене вопроса
+  useEffect(() => {
+    setSelectedOption(null)
+    setTimeLeft(question?.time || 20)
+  }, [question?.id])
+
+  // Управление таймером
   useEffect(() => {
     // Очищаем предыдущий таймер
     if (timerRef.current) {
       clearInterval(timerRef.current)
       timerRef.current = null
     }
-
-    // Сбрасываем состояние для нового вопроса
-    setSelectedOption(null)
-    const initialTime = question?.time || 20
-    setTimeLeft(initialTime)
 
     // Не запускаем таймер если уже ответили или время вышло
     if (answered || timerExpired) return
