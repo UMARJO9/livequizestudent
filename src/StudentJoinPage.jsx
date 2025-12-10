@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import "./StudentJoinPage.css";
 
-const socket = io("http://localhost:8000", {
+const socket = io("http://192.168.43.20:8000", {
     transports: ["websocket", "polling"],
 });
 
