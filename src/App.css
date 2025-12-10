@@ -319,6 +319,28 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
+.timer-expired-message {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(231, 76, 60, 0.2);
+  border-radius: 12px;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.timer-expired-message p:first-child {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--danger);
+  margin: 0 0 1rem;
+}
+
+.timer-expired-message .waiting-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0;
+}
+
 .result-message {
   text-align: center;
   margin-top: 1.5rem;

@@ -27,6 +27,7 @@ function App() {
   const [score, setScore] = useState(0)
 
   const [results, setResults] = useState(null)
+  const [timerExpired, setTimerExpired] = useState(false)
 
   useEffect(() => {
     connectSocket()
@@ -47,7 +48,14 @@ function App() {
       setCurrentQuestion(data)
       setAnswered(false)
       setAnswerResult(null)
+      setTimerExpired(false)
       setScreen(SCREENS.QUIZ)
+    })
+
+    socket.on('session:timer_expired', (data) => {
+      console.log('Timer expired:', data)
+      setTimerExpired(true)
+      setAnswered(true)
     })
 
     socket.on('student:answer_received', (data) => {
@@ -84,6 +92,7 @@ function App() {
       socket.off('connect')
       socket.off('student:joined')
       socket.off('session:question')
+      socket.off('session:timer_expired')
       socket.off('student:answer_received')
       socket.off('answer_result')
       socket.off('session:question_closed')
@@ -114,6 +123,7 @@ function App() {
     setCurrentQuestion(null)
     setAnswered(false)
     setAnswerResult(null)
+    setTimerExpired(false)
     setScore(0)
     setResults(null)
     setError('')
@@ -142,6 +152,7 @@ function App() {
           onAnswer={handleAnswer}
           answered={answered}
           answerResult={answerResult}
+          timerExpired={timerExpired}
           score={score}
         />
       )}
