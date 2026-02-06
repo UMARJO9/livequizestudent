@@ -414,6 +414,31 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
+.player-score .percentage {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: rgba(108, 92, 231, 0.15);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-top: 8px;
+}
+
+.score-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.score-details .percentage {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(108, 92, 231, 0.15);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
 .scoreboard h2 {
   font-size: 1.25rem;
   font-weight: 600;

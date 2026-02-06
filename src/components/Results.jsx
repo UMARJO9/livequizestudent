@@ -17,7 +17,12 @@ function Results({ results, playerName, onPlayAgain }) {
             <div className="position">#{playerResult.position}</div>
             <div className="player-score">
               <span className="player-name">{playerName}</span>
-              <span className="score">{playerResult.score} очков</span>
+              <span className="score">
+                {playerResult.score} / {playerResult.max_score || playerResult.score} очков
+              </span>
+              {playerResult.percentage !== undefined && (
+                <span className="percentage">{playerResult.percentage}%</span>
+              )}
             </div>
           </div>
         )}
@@ -37,7 +42,12 @@ function Results({ results, playerName, onPlayAgain }) {
                   {player.position > 3 && `#${player.position}`}
                 </span>
                 <span className="name">{player.name}</span>
-                <span className="score">{player.score}</span>
+                <span className="score-details">
+                  <span className="score">{player.score}</span>
+                  {player.percentage !== undefined && (
+                    <span className="percentage">{player.percentage}%</span>
+                  )}
+                </span>
               </div>
             ))}
           </div>
